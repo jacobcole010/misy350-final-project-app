@@ -1,0 +1,9 @@
+{
+  "products": [
+    {"id": 1, "name": "Bread", "price": 5.99, "stock": 12, "category": "Baked Goods"},
+    {"id": 2, "name": "Croissant", "price": 3.50, "stock": 8, "category": "Pastries"},
+    {"id": 3, "name": "Cookies", "price": 4.99, "stock": 20, "category": "Cookies"},
+    {"id": 4, "name": "Muffin", "price": 5.50, "stock": 2, "category": "Baked Goods"}
+  ],
+  "sales_log": []
+}

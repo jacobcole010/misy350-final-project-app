@@ -1,0 +1,10 @@
+{
+  "owner": {
+    "password": "owner123",
+    "role": "Owner"
+  },
+  "employee": {
+    "password": "employee123",
+    "role": "Employee"
+  }
+}
