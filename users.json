@@ -6,5 +6,9 @@
   "employee": {
     "password": "employee123",
     "role": "Employee"
+  },
+  "jacob": {
+    "password": "jacob123",
+    "role": "Owner"
   }
 }
