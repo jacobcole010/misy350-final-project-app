@@ -1,9 +1,69 @@
 {
   "products": [
-    {"id": 1, "name": "Bread", "price": 5.99, "stock": 12, "category": "Baked Goods"},
-    {"id": 2, "name": "Croissant", "price": 3.50, "stock": 8, "category": "Pastries"},
-    {"id": 3, "name": "Cookies", "price": 4.99, "stock": 20, "category": "Cookies"},
-    {"id": 4, "name": "Muffin", "price": 5.50, "stock": 2, "category": "Baked Goods"}
+    {
+      "id": 1,
+      "name": "Blueberry Muffin",
+      "category": "Muffins",
+      "price": 3.5,
+      "stock": 14
+    },
+    {
+      "id": 2,
+      "name": "Cinnamon Toast",
+      "category": "Breakfast",
+      "price": 4.0,
+      "stock": 10
+    },
+    {
+      "id": 3,
+      "name": "Chocolate Brownie",
+      "category": "Brownies",
+      "price": 3.25,
+      "stock": 4
+    },
+    {
+      "id": 4,
+      "name": "Vanilla Cupcake",
+      "category": "Cupcakes",
+      "price": 3.75,
+      "stock": 8
+    },
+    {
+      "id": 5,
+      "name": "Sugar Cookie",
+      "category": "Cookies",
+      "price": 2.5,
+      "stock": 2
+    }
   ],
-  "sales_log": []
+  "sales_log": [
+    {
+      "product": "Blueberry Muffin",
+      "qty": 6,
+      "employee": "employee",
+      "date": "2026-04-08",
+      "total": 21.0
+    },
+    {
+      "product": "Cinnamon Toast",
+      "qty": 3,
+      "employee": "manager",
+      "date": "2026-04-08",
+      "total": 12.0
+    },
+    {
+      "product": "Sugar Cookie",
+      "qty": 5,
+      "employee": "employee",
+      "date": "2026-04-09",
+      "total": 12.5
+    },
+    {
+      "product": "Blueberry Muffin",
+      "qty": 1,
+      "employee": "manager",
+      "date": "2026-05-10",
+      "total": 3.5
+    }
+  ]
 }

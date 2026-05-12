@@ -1,14 +1,22 @@
 {
   "owner": {
     "password": "owner123",
-    "role": "Owner"
+    "role": "Owner",
+    "name": "Owner Demo"
+  },
+  "manager": {
+    "password": "manager123",
+    "role": "Owner",
+    "name": "Bakery Manager"
   },
   "employee": {
     "password": "employee123",
-    "role": "Employee"
+    "role": "Employee",
+    "name": "Employee Demo"
   },
-  "jacob": {
+  "jacob test acct": {
     "password": "jacob123",
-    "role": "Owner"
+    "role": "Employee",
+    "name": "Jacob Cole"
   }
 }
