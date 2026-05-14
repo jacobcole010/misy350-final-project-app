@@ -2,21 +2,25 @@
   "owner": {
     "password": "owner123",
     "role": "Owner",
-    "name": "Owner Demo"
+    "name": "Owner Demo",
+    "user_id": "OWN001"
   },
   "manager": {
     "password": "manager123",
     "role": "Owner",
-    "name": "Bakery Manager"
+    "name": "Bakery Manager",
+    "user_id": "MGR001"
   },
   "employee": {
     "password": "employee123",
     "role": "Employee",
-    "name": "Employee Demo"
+    "name": "Employee Demo",
+    "user_id": "EMP001"
   },
   "jacob test acct": {
     "password": "jacob123",
     "role": "Employee",
-    "name": "Jacob Cole"
+    "name": "Jacob Cole",
+    "user_id": "EMP004"
   }
 }

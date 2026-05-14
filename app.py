@@ -15,6 +15,7 @@ def setup_session():
         st.session_state.username = ""
         st.session_state.role = ""
         st.session_state.name = ""
+        st.session_state.user_id = ""
         st.session_state.messages = []
 
 
@@ -47,6 +48,7 @@ def show_login(auth_service):
                     st.session_state.username = user.username
                     st.session_state.role = user.role
                     st.session_state.name = user.name
+                    st.session_state.user_id = getattr(user, "user_id", user.username)
                     st.rerun()
                 else:
                     st.error("Invalid username or password.")
@@ -77,6 +79,7 @@ def show_sidebar():
         st.sidebar.title("Employee Workspace")
 
     st.sidebar.write(f"{st.session_state.name}")
+    st.sidebar.write(f"ID: {st.session_state.user_id}")
     st.sidebar.write(f"Role: {st.session_state.role}")
 
     if st.sidebar.button("Logout"):
@@ -84,11 +87,14 @@ def show_sidebar():
         st.session_state.username = ""
         st.session_state.role = ""
         st.session_state.name = ""
+        st.session_state.user_id = ""
         st.session_state.messages = []
         st.rerun()
 
     if st.session_state.role == "Owner":
-        return st.sidebar.radio("Go to", ["Owner Dashboard", "Manage Products", "Log Sale", "Sales Log", "AI Assistant"])
+        return st.sidebar.radio(
+            "Go to", ["Owner Dashboard", "Manage Products", "Change History", "Log Sale", "Sales Log", "AI Assistant"]
+        )
 
     return st.sidebar.radio("Go to", ["My Shift Dashboard", "Product Lookup", "Log Sale", "Low Stock", "AI Assistant"])
 
@@ -220,7 +226,9 @@ def show_product_management(inventory_service):
             submitted = st.form_submit_button("Add Product")
 
         if submitted:
-            success, message = inventory_service.add_product(name, category, price, stock)
+            success, message = inventory_service.add_product(
+                name, category, price, stock, st.session_state.username, st.session_state.user_id
+            )
             if success:
                 st.success(message)
                 st.rerun()
@@ -246,7 +254,9 @@ def show_product_management(inventory_service):
             submitted = st.form_submit_button("Update Product")
 
         if submitted:
-            success, message = inventory_service.update_product(product.item_id, name, category, price, stock)
+            success, message = inventory_service.update_product(
+                product.item_id, name, category, price, stock, st.session_state.username, st.session_state.user_id
+            )
             if success:
                 st.success(message)
                 st.rerun()
@@ -259,7 +269,9 @@ def show_product_management(inventory_service):
         st.warning(f"Delete {product.name}?")
 
         if st.button("Delete Product"):
-            success, message = inventory_service.delete_product(product.item_id)
+            success, message = inventory_service.delete_product(
+                product.item_id, st.session_state.username, st.session_state.user_id
+            )
             if success:
                 st.success(message)
                 st.rerun()
@@ -302,7 +314,9 @@ def show_log_sale(inventory_service):
         submitted = st.form_submit_button("Log Sale")
 
     if submitted:
-        success, message = inventory_service.log_sale(choices[selected], quantity, st.session_state.username)
+        success, message = inventory_service.log_sale(
+            choices[selected], quantity, st.session_state.username, st.session_state.user_id
+        )
         if success:
             st.success(message)
             st.rerun()
@@ -317,6 +331,17 @@ def show_sales_log(inventory_service):
         st.table(sales)
     else:
         st.info("No sales have been logged yet.")
+
+
+def show_change_history(inventory_service):
+    st.title("Change History")
+    st.caption("Owner view: product edits with the employee or manager ID that made each change.")
+
+    changes = inventory_service.get_change_rows()
+    if changes:
+        st.table(changes)
+    else:
+        st.info("No product changes have been recorded yet.")
 
 
 def show_low_stock(inventory_service):
@@ -357,6 +382,8 @@ def show_app(inventory_service, ai_assistant):
         show_employee_dashboard(inventory_service)
     elif page == "Manage Products":
         show_product_management(inventory_service)
+    elif page == "Change History":
+        show_change_history(inventory_service)
     elif page == "Product Lookup":
         show_catalog(inventory_service)
     elif page == "Log Sale":
